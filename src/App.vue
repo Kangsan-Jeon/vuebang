@@ -8,6 +8,8 @@
   <div v-for="(product, i) in products" :key="i">
     <h4>{{ product["name"] }}</h4>
     <p>{{ product["price"] }}</p>
+    <!-- v-on = @, event example: mouseover, drag, ... -->
+    <button @click="reportClick(product)">허위매물신고</button> <span>신고수: {{ product['reportCnt'] }}</span>
   </div>
 
 </template>
@@ -23,18 +25,26 @@ export default {
         {
           name: "역삼동 원룸",
           price: "50만원",
+          reportCnt: 0,
         },
         {
           name: "천호동 원룸",
           price: "60만원",
+          reportCnt: 0,
         },
         {
           name: "마포구 원룸",
           price: "70만원",
+          reportCnt: 0,
         },
       ],
       menus: ['Home', 'Shop', 'About'],
     }
+  },
+  methods: {
+    reportClick(product) {
+      product['reportCnt']++
+    },
   },
   components: {
   }
