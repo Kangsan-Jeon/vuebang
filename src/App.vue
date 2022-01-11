@@ -14,9 +14,9 @@
 
 
   <div v-for="(product, i) in products" :key="i">
-    <img v-bind:src=product.imgPath class="room-img" @click="modalIsOpen=true"/>
-    <h4 @click="modalIsOpen=true">{{ product["name"] }}</h4>
-    <p>{{ product["price"] }}</p>
+    <img :src=product.image class="room-img" @click="modalIsOpen=true"/>
+    <h4 @click="modalIsOpen=true">{{ product["title"] }}</h4>
+    <p>{{ product["price"] }}원</p>
     <!-- v-on = @, event example: mouseover, drag, ... -->
     <button @click="reportClick(product)">허위매물신고</button> <span>신고수: {{ product['reportCnt'] }}</span>
   </div>
@@ -24,33 +24,38 @@
 </template>
 
 <script>
+import onerooms from './assets/oneroom.json';
 
 export default {
   name: 'App',
   data() {
     // 자주 변경되는 값을 data에 저장 -> 사이트 이름은 data에 저장안해도 됨
+    const products = onerooms.map(oneroom => {
+        return {...oneroom, reportCnt: 0}
+      })    
     return {
-      products: [
-        {
-          name: "역삼동 원룸",
-          price: "50만원",
-          reportCnt: 0,
-          imgPath: require("./assets/room0.jpg"),
-        },
-        {
-          name: "천호동 원룸",
-          price: "60만원",
-          reportCnt: 0,
-          imgPath: require("./assets/room1.jpg"),
+      products: products,
+      // products: [
+      //   {
+      //     name: "역삼동 원룸",
+      //     price: "50만원",
+      //     reportCnt: 0,
+      //     imgPath: require("./assets/room0.jpg"),
+      //   },
+      //   {
+      //     name: "천호동 원룸",
+      //     price: "60만원",
+      //     reportCnt: 0,
+      //     imgPath: require("./assets/room1.jpg"),
           
-        },
-        {
-          name: "마포구 원룸",
-          price: "70만원",
-          reportCnt: 0,
-          imgPath: require("./assets/room2.jpg"),
-        },
-      ],
+      //   },
+      //   {
+      //     name: "마포구 원룸",
+      //     price: "70만원",
+      //     reportCnt: 0,
+      //     imgPath: require("./assets/room2.jpg"),
+      //   },
+      // ],
       menus: ['Home', 'Shop', 'About'],
       modalIsOpen: false,
     }
