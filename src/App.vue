@@ -1,17 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <div>
-      <h4>{{ products[0]}}</h4>
-      <p>50만원</p>
+
+  <div class="menu">
+    <a v-for="(menu, i) in menus" :key="i">{{ i+1 }}. {{ menu }}</a> <!-- key: 반복문 돌린 요소를 컴퓨터가 구분하기 위해 씀, 변수 정의 역할 -->
   </div>
-  <div>
-      <h4>{{ products[1]}}</h4>
-      <p>가격은 아무거나</p>
+
+  
+  <div v-for="(product, i) in products" :key="i">
+    <h4>{{ product["name"] }}</h4>
+    <p>{{ product["price"] }}</p>
   </div>
-  <div>
-      <h4>{{ products[2]}}</h4>
-      <p>가격은 아무거나</p>
-  </div>
+
 </template>
 
 <script>
@@ -21,7 +19,21 @@ export default {
   data() {
     // 자주 변경되는 값을 data에 저장 -> 사이트 이름은 data에 저장안해도 됨
     return {
-      products: ['역삼동 원룸', '천호동 원룸', '마포구 원룸'],
+      products: [
+        {
+          name: "역삼동 원룸",
+          price: "50만원",
+        },
+        {
+          name: "천호동 원룸",
+          price: "60만원",
+        },
+        {
+          name: "마포구 원룸",
+          price: "70만원",
+        },
+      ],
+      menus: ['Home', 'Shop', 'About'],
     }
   },
   components: {
@@ -36,6 +48,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.menu {
+  background: darkslateblue;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.menu a {
+  color: white;
+  padding: 10px;
 }
 </style>
